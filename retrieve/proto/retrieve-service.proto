@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+message Task {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    int32 priority = 4;
+}
+
+message RetrieveRequest {
+    string token = 1;
+    string id = 2;
+}
+
+message RetrieveResponse {
+    Task task = 1;
+}
+
+message RetrieveAllRequest {
+    string token = 1;
+}
+
+message RetrieveAllResponse {
+    repeated Task tasks = 1;
+}
+
+service TodoRetrieveService {
+    rpc Retrieve(RetrieveRequest) returns (RetrieveResponse);
+    rpc RetrieveAll(RetrieveAllRequest) returns (RetrieveAllResponse);
+}

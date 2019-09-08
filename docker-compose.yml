@@ -1,0 +1,43 @@
+version: '3.5'
+services:
+  client:
+    hostname: grpc-client
+    container_name: grpc-client
+    build: ./client
+    depends_on:
+      - server
+    ports:
+      - 9002:9002
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./client/.env
+    networks:
+      - tiered
+  server:
+    hostname: grpc-server
+    container_name: grpc-server
+    build: ./server
+    depends_on:
+      - mongodb
+    ports:
+      - 9001:9001
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./server/.env
+    networks:
+      - tiered
+  mongodb:
+    hostname: database
+    container_name: data-tier
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/usr/data/db
+    command: mongod --smallfiles --logpath=/dev/null
+    networks:
+      - tiered
+networks:
+  tiered:

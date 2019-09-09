@@ -1,23 +1,23 @@
 version: '3.5'
 services:
-  client:
-    hostname: grpc-client
-    container_name: grpc-client
-    build: ./client
+  create-client:
+    hostname: grpc-create-client
+    container_name: grpc-create-client
+    build: ./create/client
     depends_on:
-      - server
+      - create-server
     ports:
-      - 9002:9002
+      - 9701:9701
     volumes:
       - .:/usr/src/application
     env_file:
-      - ./client/.env
+      - ./create/client/.env
     networks:
       - tiered
-  server:
-    hostname: grpc-server
-    container_name: grpc-server
-    build: ./server
+  create-server:
+    hostname: grpc-create-server
+    container_name: grpc-create-server
+    build: ./create/server
     depends_on:
       - mongodb
     ports:
@@ -25,9 +25,93 @@ services:
     volumes:
       - .:/usr/src/application
     env_file:
-      - ./server/.env
+      - ./create/server/.env
     networks:
       - tiered
+  retrieve-client:
+    hostname: grpc-retrieve-client
+    container_name: grpc-retrieve-client
+    build: ./retrieve/client
+    depends_on:
+      - retrieve-server
+    ports:
+      - 9702:9702
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./retrieve/client/.env
+    networks:
+      - tiered
+  retrieve-server:
+    hostname: grpc-retrieve-server
+    container_name: grpc-retrieve-server
+    build: ./retrieve/server
+    depends_on:
+      - mongodb
+    ports:
+      - 9002:9002
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./retrieve/server/.env
+    networks:
+      - tiered
+  update-client:
+    hostname: grpc-update-client
+    container_name: grpc-update-client
+    build: ./update/client
+    depends_on:
+      - update-server
+    ports:
+      - 9703:9703
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./update/client/.env
+    networks:
+      - tiered
+  update-server:
+    hostname: grpc-update-server
+    container_name: grpc-update-server
+    build: ./update/server
+    depends_on:
+      - mongodb
+    ports:
+      - 9003:9003
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./update/server/.env
+    networks:
+      - tiered
+  delete-client:
+    hostname: grpc-delete-client
+    container_name: grpc-delete-client
+    build: ./delete/client
+    depends_on:
+      - delete-server
+    ports:
+      - 9704:9704
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./delete/client/.env
+    networks:
+      - tiered
+  delete-server:
+    hostname: grpc-delete-server
+    container_name: grpc-delete-server
+    build: ./delete/server
+    depends_on:
+      - mongodb
+    ports:
+      - 9004:9004
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./delete/server/.env
+    networks:
+      - tiered  
   mongodb:
     hostname: database
     container_name: data-tier

@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 
-	Client = todopb.TodoDeleteServiceClient(conn)
+	Client = todopb.NewTodoDeleteServiceClient(conn)
 
 	var g *gin.Engine
 	g = gin.Default()

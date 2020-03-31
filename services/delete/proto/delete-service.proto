@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+message Task {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    int32 priority = 4;
+}
+
+message DeleteRequest {
+    string token = 1;
+    string id = 2;
+}
+
+message DeleteResponse {
+    int64 success = 1;
+}
+
+service TodoDeleteService {
+    rpc Delete(DeleteRequest) returns (DeleteResponse);
+}

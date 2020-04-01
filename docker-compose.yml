@@ -1,9 +1,9 @@
 version: '3.5'
 services:
-  create-server:
+  create:
     hostname: create-service
     container_name: create-service
-    build: ./services/create/server
+    build: ./services/create
     depends_on:
       - mongodb
     ports:
@@ -11,18 +11,32 @@ services:
     volumes:
       - .:/usr/src/application
     env_file:
-      - ./services/create/server/.env
+      - ./services/create/.env
+    networks:
+      - tiered
+  ui:
+    hostname: frontend
+    container_name: frontend
+    build: ./ui
+    depends_on:
+      - create
+    ports:
+      - 9001:9001
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./ui/.env
     networks:
       - tiered
   mongodb:
-    hostname: database
+    hostname: data-tier
     container_name: data-tier
     image: mongo:latest
     ports:
       - 27017:27017
     volumes:
       - ./data/db:/usr/data/db
-    command: mongod #--smallfiles --logpath=/dev/null
+    command: mongod 
     networks:
       - tiered
 networks:

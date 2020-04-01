@@ -18,17 +18,15 @@ var (
 )
 
 func init() {
-	os.Setenv("CSERVER_HOST", "0.0.0.0")
-	os.Setenv("CSERVER_PORT", "7001")
+	os.Setenv("CSERVER_PORT", "7001") // Need to figure out how to access the services .env port value
 
-	CSHOST := os.Getenv("CSERVER_HOST")
 	CSPORT, err := strconv.ParseInt(os.Getenv("CSERVER_PORT"), 10, 64)
 	if err != nil {
 		log.Fatalf("Could not parse server port env variable ...")
 	}
 
-	log.Printf("Connected to create-service grpc server on %s:%d ...", CSHOST, CSPORT)
-	conn, err := grpc.Dial(fmt.Sprintf("%s:%d", CSHOST, CSPORT), grpc.WithInsecure())
+	log.Printf("Connected to create-service grpc server at create-service:%d ...", CSPORT)
+	conn, err := grpc.Dial(fmt.Sprintf("create-service:%d", CSPORT), grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}

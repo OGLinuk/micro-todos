@@ -34,12 +34,15 @@ func init() {
 	}
 
 	createClient = cpb.NewTodoCreateServiceClient(conn)
+
+	tpl = template.Must(template.ParseGlob("templates/*"))
 }
 
 func main() {
 	PORT := 9001
 
 	http.HandleFunc("/", index)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	log.Printf("Starting server on %d ...", PORT)
 	http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", PORT), nil)
 }

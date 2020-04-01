@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	rpb "github.com/OGLinuk/micro-todos/retrieve/proto"
+	rpb "github.com/OGLinuk/micro-todos/services/retrieve/proto"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"google.golang.org/grpc/codes"

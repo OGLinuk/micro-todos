@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"strconv"
 
-	rpb "github.com/OGLinuk/micro-todos/retrieve/proto"
+	rpb "github.com/OGLinuk/micro-todos/services/retrieve/proto"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -32,8 +32,8 @@ var (
 
 func main() {
 	log.Println("Starting retrieve-service gRPC server ...")
-	SHOST := os.Getenv("SERVER_HOST")
-	SPORT, err := strconv.ParseInt(os.Getenv("SERVER_PORT"), 10, 64)
+	SHOST := os.Getenv("RSERVER_HOST")
+	SPORT, err := strconv.ParseInt(os.Getenv("RSERVER_PORT"), 10, 64)
 	if err != nil {
 		log.Fatalf("Could not parse server port env variable ...")
 	}

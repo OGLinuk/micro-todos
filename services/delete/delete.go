@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	dpb "github.com/OGLinuk/micro-todos/delete/proto"
+	dpb "github.com/OGLinuk/micro-todos/services/delete/proto"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"google.golang.org/grpc/codes"

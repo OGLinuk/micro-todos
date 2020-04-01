@@ -14,12 +14,57 @@ services:
       - ./services/create/.env
     networks:
       - tiered
+  retrieve:
+    hostname: retrieve-service
+    container_name: retrieve-service
+    build: ./services/retrieve
+    depends_on:
+      - create
+    ports:
+      - 7002:7002
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./services/retrieve/.env
+    networks:
+      - tiered
+  update:
+    hostname: update-service
+    container_name: update-service
+    build: ./services/update
+    depends_on:
+      - retrieve
+    ports:
+      - 7003:7003
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./services/update/.env
+    networks:
+      - tiered
+  delete:
+    hostname: delete-service
+    container_name: delete-service
+    build: ./services/delete
+    depends_on:
+      - update
+    ports:
+      - 7004:7004
+    volumes:
+      - .:/usr/src/application
+    env_file:
+      - ./services/delete/.env
+    networks:
+      - tiered
   ui:
     hostname: frontend
     container_name: frontend
     build: ./ui
     depends_on:
       - create
+      - retrieve
+      - update
+      - delete
     ports:
       - 9001:9001
     volumes:

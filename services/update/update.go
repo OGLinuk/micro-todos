@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	upb "github.com/OGLinuk/micro-todos/update/proto"
+	upb "github.com/OGLinuk/micro-todos/services/update/proto"
 	"go.mongodb.org/mongo-driver/bson"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

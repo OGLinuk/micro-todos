@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"strconv"
 
-	upb "github.com/OGLinuk/micro-todos/update/proto"
+	upb "github.com/OGLinuk/micro-todos/services/update/proto"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -32,8 +32,8 @@ var (
 
 func main() {
 	log.Println("Starting update-service gRPC server ...")
-	SHOST := os.Getenv("SERVER_HOST")
-	SPORT, err := strconv.ParseInt(os.Getenv("SERVER_PORT"), 10, 64)
+	SHOST := os.Getenv("USERVER_HOST")
+	SPORT, err := strconv.ParseInt(os.Getenv("USERVER_PORT"), 10, 64)
 	if err != nil {
 		log.Fatalf("Could not parse server port env variable ...")
 	}

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	cpb "github.com/OGLinuk/micro-todos/create/proto"
+	cpb "github.com/OGLinuk/micro-todos/services/create/proto"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {

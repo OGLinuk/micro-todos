@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	cpb "github.com/OGLinuk/micro-todos/create/proto"
+	cpb "github.com/OGLinuk/micro-todos/services/create/proto"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"google.golang.org/grpc/codes"

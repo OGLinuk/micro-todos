@@ -18,17 +18,17 @@ var (
 )
 
 func init() {
-	os.Setenv("SERVER_HOST", "0.0.0.0")
-	os.Setenv("SERVER_PORT", "7001")
+	os.Setenv("CSERVER_HOST", "0.0.0.0")
+	os.Setenv("CSERVER_PORT", "7001")
 
-	SHOST := os.Getenv("SERVER_HOST")
-	SPORT, err := strconv.ParseInt(os.Getenv("SERVER_PORT"), 10, 64)
+	CSHOST := os.Getenv("CSERVER_HOST")
+	CSPORT, err := strconv.ParseInt(os.Getenv("CSERVER_PORT"), 10, 64)
 	if err != nil {
 		log.Fatalf("Could not parse server port env variable ...")
 	}
 
-	log.Printf("Client connected to grpc server on %s:%d ...", SHOST, SPORT)
-	conn, err := grpc.Dial(fmt.Sprintf("%s:%d", SHOST, SPORT), grpc.WithInsecure())
+	log.Printf("Connected to create-service grpc server on %s:%d ...", CSHOST, CSPORT)
+	conn, err := grpc.Dial(fmt.Sprintf("%s:%d", CSHOST, CSPORT), grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}

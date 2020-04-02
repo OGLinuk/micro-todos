@@ -25,6 +25,8 @@ var (
 )
 
 func init() {
+	// TODO: Apply DRY with connections to services below
+
 	// Create-service connection
 	conn, err := grpc.Dial(fmt.Sprintf("create-service:%d", 7001), grpc.WithInsecure())
 	if err != nil {
@@ -69,6 +71,7 @@ func main() {
 		log.Fatalf("Could not parse server port env variable ...")
 	}
 	http.HandleFunc("/", index)
+	http.HandleFunc("/create", create)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	defer log.Printf("Starting server at %s:%d ...", HOST, PORT)
 	http.ListenAndServe(fmt.Sprintf("%s:%d", HOST, PORT), nil)
